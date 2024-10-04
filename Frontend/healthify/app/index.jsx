@@ -1,19 +1,15 @@
+import { Link } from 'expo-router';
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+const App = () =>{
     return (
-        <View style={styles.container}>
-            <Text>React Native</Text>
+        <View className="w-full items-center justify-center h-full px-4">
+            <Text>Healthify</Text>
+            <Text>AI-Integrated Early Disease Diagnosis Application</Text>
+            <Link href="/chat" style={{color: "blue"}} >Go to chat</Link>
             <StatusBar style="auto" />
         </View>
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fffff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});
+export default App
