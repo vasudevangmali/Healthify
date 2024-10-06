@@ -4,7 +4,7 @@
     "slug": "healthify",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/FaviconRB.png",
+    "icon": "./assets/images/FaviconRB1.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
