@@ -1,13 +1,12 @@
-import React, { useState, useCallback, useEffect } from 'react'
-import { View, Text } from 'react-native'
-import { SplashScreen, Stack } from 'expo-router';
-import { useFonts } from 'expo-font'
+import React, { useEffect } from 'react';
+import { Stack } from 'expo-router';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
+SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
-  const [appIsReady, setAppIsReady] = useState(false);
-
-  const [fontsLoaded, error] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     "Nunito-Bold": require("../assets/fonts/Nunito-Bold.ttf"),
     "Nunito-ExtraBold": require("../assets/fonts/Nunito-ExtraBold.ttf"),
     "Nunito-ExtraLight": require("../assets/fonts/Nunito-ExtraLight.ttf"),
@@ -18,18 +17,27 @@ const RootLayout = () => {
   });
 
   useEffect(() => {
-    if(error) throw error
-    if(fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded, error])
+    if (fontError) throw fontError;
+  }, [fontError]);
 
-  if(!fontsLoaded && !error) return null;
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <Stack>
-      <Stack.Screen name='index' options={{headerShown: false}}/>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="login" options={{ headerShown: false }} />
+      <Stack.Screen name="signin" options={{ headerShown: false }} />
+      <Stack.Screen name="home" options={{ headerShown: false }} />
     </Stack>
-  )
-}
+  );
+};
 
-export default RootLayout
+export default RootLayout;
