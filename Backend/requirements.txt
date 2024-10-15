@@ -1,4 +1,2 @@
-fastapi
-uvicorn
-SQLAlchemy
-psycopg2
+Flask
+firebase-admin
