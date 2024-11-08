@@ -2,15 +2,34 @@ import { Link } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
+// Vasu
+import { auth, db, createUserWithEmailAndPassword, setDoc, doc } from '@/constants/firebase';
+
 const SigninScreen = () => {
-    const [name, setName] = useState('');
-    const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSignin = () => {
+  const handleSignin = async () => {
     // Implement login logic here
-    console.log('Signin attempted with:', username, password);
+    // console.log('Signin attempted with:', username, password);
+
+    // Vasu
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, username, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, 'users', user.uid), {
+        fullName: name,
+        username: username,
+        uid: user.uid,
+      });
+
+      console.log('User signed in and data stored:', user);
+    } catch (error) {
+        console.error('Error signing in:', error);
+    }
   };
 
   return (
